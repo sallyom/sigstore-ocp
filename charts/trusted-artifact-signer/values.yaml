@@ -107,6 +107,7 @@ configs:
       - tuf-secret-copy-job
 
   cosign:
+    enabled: false
     # -- DNS name to be used to generate environment variables for cosign commands.
     # By default, in OpenShift, the value for this is
     # apps.$(oc get dns cluster -o jsonpath='{ .spec.baseDomain }')

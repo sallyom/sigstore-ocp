@@ -13,6 +13,9 @@
             "properties": {
                 "cosign": {
                     "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
                         "appsSubdomain": {
                             "type": "string"
                         },

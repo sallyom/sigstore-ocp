@@ -86,6 +86,7 @@ Kubernetes: `>= 1.19.0-0`
 |-----|-------------|------|---------|
 | configs.cosign.appsSubdomain | DNS name to be used to generate environment variables for cosign commands. By default, in OpenShift, the value for this is apps.$(oc get dns cluster -o jsonpath='{ .spec.baseDomain }') | string | `""` |
 | configs.cosign.create | whether to create the cosign namespace | bool | `true` |
+| configs.cosign.enabled |  | bool | `false` |
 | configs.cosign.image | Image containing the cosign binary as well as environment variables with the base domain injected. | object | `{"pullPolicy":"IfNotPresent","registry":"quay.io","repository":"sallyom/cosign","version":"latest"}` |
 | configs.cosign.name | Name of deployment | string | `"cosign"` |
 | configs.cosign.namespace | namespace for cosign resources | string | `"cosign"` |
