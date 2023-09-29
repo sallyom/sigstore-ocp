@@ -124,8 +124,9 @@ configs:
     # -- Image containing the cosign binary as well as environment variables with the base domain injected.
     image:
       registry: quay.io
-      repository: securesign/cosign
-      version: v2.1.1
+      # TODO: update image
+      repository: sallyom/cosign
+      version: latest
       pullPolicy: IfNotPresent
 
 rbac:
@@ -145,7 +146,7 @@ scaffold:
       image:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/scaffolding/ct-server
-        version: "sha256:40937ee100feb8187ca766063d465d168e5afdfafd69501b9dae9346fb464e47"
+        version: "8aaabdf51fb0b7823c53bf58cda2f8beabb4fbfe"
         pullPolicy: IfNotPresent
     createctconfig:
       backoffLimit: 30
@@ -159,7 +160,7 @@ scaffold:
       image:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/scaffolding/createctconfig
-        version: "sha256:b063d921637a0fbb4af3619a6e036e8f9b2ffd40d014381dd23dcba116c9f893"
+        version: "8aaabdf51fb0b7823c53bf58cda2f8beabb4fbfe"
         pullPolicy: IfNotPresent
     createcerts:
       fullnameOverride: ctlog-createcerts
@@ -169,7 +170,7 @@ scaffold:
       image:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/scaffolding/createtree
-        version: "sha256:8733633da1963bed1a1770d177bcceeea038c1a367f75802f5385a4924fe404a"
+        version: "39736a585d0d5b61bac55a973477feff666cb12e"
         pullPolicy: IfNotPresent
   fulcio:
     enabled: true
@@ -187,14 +188,14 @@ scaffold:
       image:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/scaffolding/createcerts
-        version: "sha256:f0f954ea28ddab1ff8ec39ada5c04a38548367e47a9336d87bb328624736777d"
+        version: "8aaabdf51fb0b7823c53bf58cda2f8beabb4fbfe"
         pullPolicy: IfNotPresent
     server:
       fullnameOverride: fulcio-server
       image:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/fulcio/fulcio
-        version: "sha256:ef671ccb83e9fa23aa11f00238ae3db16a873ef2add204a8b4cc5a488eadf203"
+        version: "e80d2fcaf464e47ef6b60ce88cb63753e720a3c8"
         pullPolicy: IfNotPresent
       # If content and/or files not provided in configs.fulcio.secret
       # then this secret must exist in fulcio-system ns. See ../quickstart-with-keycloak.md
@@ -225,6 +226,7 @@ scaffold:
       fullnameOverride: rekor-server
       image:
         registry: quay.io
+        # TODO: update image
         repository: securesign/rekor-server
         version: v1.2.2
         pullPolicy: IfNotPresent
@@ -248,13 +250,13 @@ scaffold:
       image:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/scaffolding/createtree
-        version: "sha256:8733633da1963bed1a1770d177bcceeea038c1a367f75802f5385a4924fe404a"
+        version: "39736a585d0d5b61bac55a973477feff666cb12e"
         pullPolicy: IfNotPresent
     backfillredis:
       image:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/rekor/backfill-redis
-        version: "sha256:389e954a1d99de9c88aadd4d21e7725271e7dcb5756723e9e12404bfef7af97a"
+        version: "8aaabdf51fb0b7823c53bf58cda2f8beabb4fbfe"
         pullPolicy: IfNotPresent
   trillian:
     enabled: true
@@ -267,13 +269,13 @@ scaffold:
       image:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/scaffolding/createdb
-        version: "sha256:06ec5784e20de10f0cdcad1277afb0a58e7041883a170e1328c1567fecf8218d"
+        version: "cb864e95b7fed566ebbacda748b1e4acd303a618"
         pullPolicy: IfNotPresent
     initContainerImage:
       netcat:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/trillian/netcat
-        version: "sha256:2c46282070e019cf44e597579cadee65e75e72b86ec57e2c87793c90ba6d15ed"
+        version: "cb864e95b7fed566ebbacda748b1e4acd303a618"
       curl:
         registry: registry.access.redhat.com
         repository: ubi9/ubi-minimal
@@ -298,7 +300,7 @@ scaffold:
       image:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/trillian/trillian-logsigner
-        version: "sha256:bd9a953e0fead87152452cde3ab24188f2eaae48c3cd50d98f5715f28a8dc371"
+        version: "9dcb2ee98b192f1f4cb12828af2691e6af668cc3"
         pullPolicy: IfNotPresent
     logServer:
       name: trillian-logserver
@@ -308,7 +310,7 @@ scaffold:
       image:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/trillian/trillian-logserver
-        version: "sha256:5804a6021cc8809b16e99b24867b411cb3bbc7b304d60b7f178e6df2df6d215c"
+        version: "9dcb2ee98b192f1f4cb12828af2691e6af668cc3"
         pullPolicy: IfNotPresent
     mysql:
       fullnameOverride: trillian-mysql
@@ -316,11 +318,11 @@ scaffold:
         scaffoldSQLProxy:
           registry: quay.io
           repository: redhat-user-workloads/securesign-tenant/scaffolding/cloudsqlproxy
-          version: "sha256:fa77970362f586a40e714f9a01799a571bcd4519e354a147fa8f87cd4f498a3c"
+          version: "8aaabdf51fb0b7823c53bf58cda2f8beabb4fbfe"
       image:
         registry: quay.io
         repository: redhat-user-workloads/securesign-tenant/trillian/trillian-database
-        version: "sha256:b1f12da6571b57fd529d48e3d4ad43afc44a48a1cccf5f397bc7792ff0e62e38"
+        version: "9dcb2ee98b192f1f4cb12828af2691e6af668cc3"
         pullPolicy: IfNotPresent
       args: []
       securityContext:
