@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
     - name: curl
-      image: quay.io/curl/curl:latest
+      image: registry.redhat.io/ubi9:latest
       command: ["/bin/sh", "-c"]
       args:
         - |

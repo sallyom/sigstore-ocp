@@ -23,7 +23,7 @@ Options:
     --catalog                 If publish is set, this needs to point to a fork of
                               git@github.com:openshift-helm-charts/charts.git with write access
     --chart-version           Chart release version (used as 'version' in Chart.yaml)
-    --rhtas-version            Developer Hub version (used as 'appVersion' in Chart.yaml and as image tag)
+    --rhtas-version           Trusted Artifact Signer version (used as 'appVersion' in Chart.yaml and as image tag)
     --debug                   Enable logging
     --help                    Prints this message
 
@@ -68,7 +68,8 @@ if [[ ! $RHTAS_VERSION ]]; then usage; fi
 
 HELM_DIR=$(mktemp -d)
 if [[ $DEBUG -eq 1 ]]; then echo "Running in HELM_DIR = $HELM_DIR"; fi
-HELM_SOURCE_REF="main"
+# TODO: Update to main
+HELM_SOURCE_REF="kind-plus-ct"
 CATALOG_DIR=$(mktemp -d)
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # TODO switch to jq wrapper version of yq (not mikefarah)
@@ -123,9 +124,7 @@ if [[ $DEBUG -eq 1 ]]; then
     echo "Fetching Trusted Artifact Signer chart..."
 fi
 
-# Replace uncertified curl image with ubi9 in the test template (the file is not a valid yaml for yq)
-sed -i".original" -e "s%quay.io/curl/curl:latest%registry.redhat.io/ubi9:latest%" ${HELM_DIR}/charts/trusted-artifact-signer/templates/tests/test-connection.yaml
-rm ${HELM_DIR}/charts/trusted-artifact-signer/templates/tests/test-connection.yaml.original
+git clone --depth=1 -q --branch=${HELM_SOURCE_REF} git@github.com:securesign/sigstore-ocp.git ${HELM_DIR}
 
 if [[ $DEBUG -eq 1 ]]; then
     echo "Building dependencies..."
