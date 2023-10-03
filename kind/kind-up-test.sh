@@ -36,8 +36,6 @@ kubectl apply -f ./kind/servicemonitor-crd.yaml
 #  --selector=app.kubernetes.io/component=controller \
 #  --timeout=90s
 #
-# TODO: add a wait for ingress to be ready with test.yaml & curl
-#sleep 20
 
 oc create ns fulcio-system
 oc create ns rekor-system

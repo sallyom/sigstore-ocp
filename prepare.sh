@@ -130,7 +130,7 @@ rm ${HELM_DIR}/charts/trusted-artifact-signer/templates/tests/test-connection.ya
 if [[ $DEBUG -eq 1 ]]; then
     echo "Building dependencies..."
 fi
-helm repo add --force-update sigstore https://charts.bitnami.com/bitnami 1>/dev/null
+helm repo add --force-update sigstore "https://sigstore.github.io/helm-charts" 1>/dev/null
 
 if [[ $DEBUG -eq 1 ]]; then
     echo "Building helm deps in ${HELM_DIR}/charts/trusted-artifact-signer ..."
